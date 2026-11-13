@@ -11,7 +11,7 @@ mkdir -p results
 bench() { # outfile args...
   local out=$1; shift
   echo "\$ java $BENCH_JVM -cp $JAR dev.minilog.bench.Bench $*" | tee -a "results/$out"
-  java $BENCH_JVM -cp "$JAR" dev.minilog.bench.Bench "$@" 2>>"results/${out%.txt}.stderr" | tee -a "results/$out"
+  java $BENCH_JVM -cp "$JAR" dev.minilog.bench.Bench "$@" 2>&1 | tee -a "results/$out"
 }
 header() { # outfile
   { echo "# $(date '+%Y-%m-%d %H:%M:%S %Z')  $(sysctl -n machdep.cpu.brand_string) $(sysctl -n hw.ncpu) cores $(sysctl -n hw.memsize | awk '{print $1/1073741824 " GiB"}')  $(sw_vers -productName) $(sw_vers -productVersion)";
@@ -54,6 +54,17 @@ if [[ $what == fsync || $what == all ]]; then
     done
   done
 fi
+if [[ $what == long || $what == all ]]; then
+  # Longer measurement windows for the headline configurations (the matrix runs above last 1-4 s each).
+  header produce-long.txt
+  header consume-long.txt
+  for rep in $(seq 1 "$REPS"); do
+    bench produce-long.txt produce --size 100 --acks -1 --batch 131072 --linger 5 --messages 10000000
+    bench produce-long.txt produce --size 1024 --acks -1 --batch 131072 --linger 5 --messages 3000000
+    bench consume-long.txt consume --size 100 --messages 5000000
+    bench consume-long.txt consume --size 1024 --messages 2000000
+  done
+fi
 if [[ $what == failover || $what == all ]]; then
   header failover.txt
   bench failover.txt failover --iterations 25 --session-ms 1500
@@ -61,5 +72,7 @@ if [[ $what == failover || $what == all ]]; then
 fi
 if [[ $what == chaos || $what == all ]]; then
   header chaos.txt
-  bench chaos.txt chaos --seconds ${CHAOS_SECONDS:-180} --seed ${CHAOS_SEED:-20261112}
+  for seed in 20261112 7 42; do
+    bench chaos.txt chaos --seconds ${CHAOS_SECONDS:-120} --seed $seed
+  done
 fi

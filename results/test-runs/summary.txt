@@ -10,3 +10,10 @@ run 8: PASS tests=55 failures=0 seconds=33
 run 9: PASS tests=55 failures=0 seconds=32
 run 10: PASS tests=55 failures=0 seconds=33
 PASSED 10 / 10 runs
+# 2026-11-12 18:57 ./scripts/repeat-tests.sh 5   (final code: after consumer in-flight fetch + failover clock changes)
+run 1: PASS tests=55 failures=0 seconds=27
+run 2: PASS tests=55 failures=0 seconds=26
+run 3: PASS tests=55 failures=0 seconds=27
+run 4: PASS tests=55 failures=0 seconds=26
+run 5: PASS tests=55 failures=0 seconds=27
+PASSED 5 / 5 runs

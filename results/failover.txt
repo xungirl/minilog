@@ -1,0 +1,59 @@
+# 2026-11-12 18:49:37 PST  Apple M2 8 cores 24 GiB  macOS 15.4
+# openjdk version "21.0.5" 2024-10-15 LTS
+# broker JVMs: -Xms512m -Xmx512m -XX:+UseG1GC ; all processes on localhost
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench failover --iterations 25 --session-ms 1500
+# minilog bench mode=failover opts={session-ms=1500, iterations=25} started=2026-11-12T18:49:38 java=21.0.5 cores=8
+ITER 0 killed=1 new_leader=2 failover_ms=1647
+ITER 1 killed=2 new_leader=3 failover_ms=1641
+ITER 2 killed=3 new_leader=1 failover_ms=1545
+ITER 3 killed=1 new_leader=2 failover_ms=1600
+ITER 4 killed=2 new_leader=3 failover_ms=1596
+ITER 5 killed=3 new_leader=1 failover_ms=1596
+ITER 6 killed=1 new_leader=2 failover_ms=1579
+ITER 7 killed=2 new_leader=3 failover_ms=1508
+ITER 8 killed=3 new_leader=1 failover_ms=1568
+ITER 9 killed=1 new_leader=2 failover_ms=1574
+ITER 10 killed=2 new_leader=3 failover_ms=1537
+ITER 11 killed=3 new_leader=1 failover_ms=1553
+ITER 12 killed=1 new_leader=2 failover_ms=1593
+ITER 13 killed=2 new_leader=3 failover_ms=1493
+ITER 14 killed=3 new_leader=1 failover_ms=1471
+ITER 15 killed=1 new_leader=2 failover_ms=1491
+ITER 16 killed=2 new_leader=3 failover_ms=1591
+ITER 17 killed=3 new_leader=1 failover_ms=1579
+ITER 18 killed=1 new_leader=2 failover_ms=1535
+ITER 19 killed=2 new_leader=3 failover_ms=1672
+ITER 20 killed=3 new_leader=1 failover_ms=1487
+ITER 21 killed=1 new_leader=2 failover_ms=1482
+ITER 22 killed=2 new_leader=3 failover_ms=1582
+ITER 23 killed=3 new_leader=1 failover_ms=1565
+ITER 24 killed=1 new_leader=2 failover_ms=1581
+RESULT failover session_timeout_ms=1500 iterations=25 median_ms=1574 p95_ms=1647 min_ms=1471 max_ms=1672 acked=113061 lost_acked=0
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench failover --iterations 25 --session-ms 500
+# minilog bench mode=failover opts={session-ms=500, iterations=25} started=2026-11-12T18:50:54 java=21.0.5 cores=8
+ITER 0 killed=1 new_leader=2 failover_ms=542
+ITER 1 killed=2 new_leader=3 failover_ms=535
+ITER 2 killed=3 new_leader=1 failover_ms=561
+ITER 3 killed=1 new_leader=2 failover_ms=661
+ITER 4 killed=2 new_leader=3 failover_ms=645
+ITER 5 killed=3 new_leader=1 failover_ms=646
+ITER 6 killed=1 new_leader=2 failover_ms=595
+ITER 7 killed=2 new_leader=3 failover_ms=663
+ITER 8 killed=3 new_leader=1 failover_ms=563
+ITER 9 killed=1 new_leader=2 failover_ms=611
+ITER 10 killed=2 new_leader=3 failover_ms=573
+ITER 11 killed=3 new_leader=1 failover_ms=558
+ITER 12 killed=1 new_leader=2 failover_ms=540
+ITER 13 killed=2 new_leader=3 failover_ms=663
+ITER 14 killed=3 new_leader=1 failover_ms=599
+ITER 15 killed=1 new_leader=2 failover_ms=590
+ITER 16 killed=2 new_leader=3 failover_ms=631
+ITER 17 killed=3 new_leader=1 failover_ms=546
+ITER 18 killed=1 new_leader=2 failover_ms=601
+ITER 19 killed=2 new_leader=3 failover_ms=642
+ITER 20 killed=3 new_leader=1 failover_ms=546
+ITER 21 killed=1 new_leader=2 failover_ms=654
+ITER 22 killed=2 new_leader=3 failover_ms=492
+ITER 23 killed=3 new_leader=1 failover_ms=582
+ITER 24 killed=1 new_leader=2 failover_ms=607
+RESULT failover session_timeout_ms=500 iterations=25 median_ms=595 p95_ms=663 min_ms=492 max_ms=663 acked=117771 lost_acked=0

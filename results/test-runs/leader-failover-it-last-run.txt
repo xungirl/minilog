@@ -1,0 +1,1 @@
+LeaderFailoverIT: kills=20 acked=14500 consumed=14500 lost=0 duplicated=0 failedSends=0

@@ -1,0 +1,14 @@
+# Variant A: commit 7eee80d with Producer.java + Consumer.java from 2972948 (both latency bugs present). 2026-11-12 18:59
+$ java -Xms2g -Xmx2g -Dminilog.log=quiet -cp minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks 1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=1, dir=/private/tmp/claude-501/-Users-xunxun-Desktop/8c07d72b-81cd-4095-b152-e127500a66d1/scratchpad/wt/bd, warmup-seconds=5} started=2026-11-12T18:59:48 java=21.0.5 cores=8
+RESULT e2e acks=1 rate=5000 size=100 sent=125000 received=125000 samples=100000 p50_ms=49.459 p99_ms=105.548 p999_ms=117.615 max_ms=147.419
+$ java -Xms2g -Xmx2g -Dminilog.log=quiet -cp minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks -1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=-1, dir=/private/tmp/claude-501/-Users-xunxun-Desktop/8c07d72b-81cd-4095-b152-e127500a66d1/scratchpad/wt/bd, warmup-seconds=5} started=2026-11-12T19:00:16 java=21.0.5 cores=8
+RESULT e2e acks=-1 rate=5000 size=100 sent=125000 received=125000 samples=100000 p50_ms=44.426 p99_ms=106.173 p999_ms=519.512 max_ms=549.104
+# Variant B: producer wake-up fix applied, consumer still waits for ALL leaders' fetches. 2026-11-12 19:00
+$ java -Xms2g -Xmx2g -Dminilog.log=quiet -cp minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks 1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=1, dir=/private/tmp/claude-501/-Users-xunxun-Desktop/8c07d72b-81cd-4095-b152-e127500a66d1/scratchpad/wt/bd, warmup-seconds=5} started=2026-11-12T19:00:45 java=21.0.5 cores=8
+RESULT e2e acks=1 rate=5000 size=100 sent=125001 received=125001 samples=100001 p50_ms=0.447 p99_ms=3.047 p999_ms=18.233 max_ms=27.817
+$ java -Xms2g -Xmx2g -Dminilog.log=quiet -cp minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks -1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=-1, dir=/private/tmp/claude-501/-Users-xunxun-Desktop/8c07d72b-81cd-4095-b152-e127500a66d1/scratchpad/wt/bd, warmup-seconds=5} started=2026-11-12T19:01:13 java=21.0.5 cores=8
+RESULT e2e acks=-1 rate=5000 size=100 sent=125000 received=125000 samples=100000 p50_ms=0.510 p99_ms=1.282 p999_ms=51.950 max_ms=504.259

@@ -1,4 +1,4 @@
-/Users/xunxun/minilog/src/main/java/dev/minilog/bench/LocalCluster.java:89: warning: [try] auto-closeable resource s is never referenced in body of corresponding try statement
-            try (java.net.Socket s = new java.net.Socket("localhost", port)) {
+/Users/xunxun/minilog/src/main/java/dev/minilog/bench/LocalCluster.java:89: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+            try (java.net.Socket ignored = new java.net.Socket("localhost", port)) {
                                  ^
 1 warning

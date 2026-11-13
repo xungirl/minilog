@@ -191,6 +191,11 @@ Where a number came only from terminal output during development, the text says 
   reads scripts incrementally, picked up the half-changed file and printed
   `line 68: 1024: command not found`. The partial output was discarded, and the long and
   failover sections were re-run cleanly. Lesson: never edit a running shell script.
+- **What went wrong (5):** the first README walkthrough used `CLI="java -cp ..."; $CLI describe`.
+  That fails in zsh, the macOS default shell, because zsh does not word-split unquoted
+  variables. The smoke test caught it (`no such file or directory`). Fix: a
+  `scripts/cli.sh` wrapper. The full walkthrough was then verified: create, produce, kill
+  broker 1, leader moves (epoch 0 → 1), consume, restart, the ISR returns to 3.
 - **Re-run:** `./scripts/run-benchmarks.sh produce|consume|long|fsync|failover|chaos`
 
 ### Key metrics

@@ -26,12 +26,12 @@ case "${1:-}" in
     sleep 1
     for i in 1 2 3; do start_one "broker-$i" dev.minilog.broker.BrokerMain "config/broker-$i.properties"; done
     sleep 2
-    java -cp "$JAR" dev.minilog.tools.Cli localhost:9090 describe ;;
+    java -Dminilog.log=quiet -cp "$JAR" dev.minilog.tools.Cli localhost:9090 describe ;;
   stop)
     for i in 1 2 3; do stop_one "broker-$i" TERM; done
     sleep 1; stop_one controller TERM ;;
   kill)    stop_one "broker-$2" KILL; echo "kill -9 broker-$2" ;;
   restart) start_one "broker-$2" dev.minilog.broker.BrokerMain "config/broker-$2.properties" ;;
-  status)  java -cp "$JAR" dev.minilog.tools.Cli localhost:9090 describe ;;
+  status)  java -Dminilog.log=quiet -cp "$JAR" dev.minilog.tools.Cli localhost:9090 describe ;;
   *) echo "usage: $0 start|stop|status|kill <id>|restart <id>"; exit 2 ;;
 esac

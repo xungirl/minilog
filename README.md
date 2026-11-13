@@ -356,13 +356,12 @@ Requirements: JDK 21. The Gradle wrapper is checked in, so nothing else is neede
 ./gradlew jar                     # build/libs/minilog.jar
 
 ./scripts/cluster.sh start        # controller :9090 + brokers :9091-9093 (logs in .cluster/)
-CLI="java -cp build/libs/minilog.jar dev.minilog.tools.Cli localhost:9090"
-$CLI create-topic orders 3 3
-printf 'alice:order-1\nbob:order-2\nalice:order-3\n' | $CLI produce orders
-$CLI consume orders my-group      # Ctrl-C to stop
-$CLI describe                     # leaders, epochs, ISR
+./scripts/cli.sh create-topic orders 3 3
+printf 'alice:order-1\nbob:order-2\nalice:order-3\n' | ./scripts/cli.sh produce orders
+./scripts/cli.sh consume orders my-group   # Ctrl-C to stop
+./scripts/cli.sh describe                  # leaders, epochs, ISR
 
-./scripts/cluster.sh kill 1       # kill -9 broker 1; watch leadership move with: describe
+./scripts/cluster.sh kill 1       # kill -9 broker 1; `cli.sh describe` shows the new leader/ISR
 ./scripts/cluster.sh restart 1
 ./scripts/cluster.sh stop
 ```

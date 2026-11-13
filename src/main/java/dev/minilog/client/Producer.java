@@ -108,6 +108,7 @@ public final class Producer implements Closeable {
         SimpleRecord record = new SimpleRecord(System.currentTimeMillis(), key, value);
         int size = RecordCodec.sizeInBytes(key, value);
         CompletableFuture<RecordMetadata> future = new CompletableFuture<>();
+        boolean newBatch = false;
         lock.lock();
         try {
             while (bufferedBytes + size > config.bufferMemory() && !closing) {
@@ -121,12 +122,15 @@ public final class Producer implements Closeable {
             if (last == null || last.sealed || (last.bytes + size > config.batchSize() && !last.records.isEmpty())) {
                 last = new Batch(tp, System.currentTimeMillis());
                 q.addLast(last);
+                newBatch = true;
             }
             last.records.add(record);
             last.futures.add(future);
             last.bytes += size;
             bufferedBytes += size;
-            if (last.bytes >= config.batchSize()) {
+            // Wake the sender when a batch is full, or when a new batch starts so that the sender
+            // can schedule it for createdMs + linger.ms (otherwise it would sleep until its next poll).
+            if (newBatch || last.bytes >= config.batchSize()) {
                 changed.signalAll();
             }
         } finally {

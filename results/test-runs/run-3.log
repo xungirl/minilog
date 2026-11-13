@@ -1,0 +1,7 @@
+/Users/xunxun/minilog/src/main/java/dev/minilog/bench/LocalCluster.java:22: warning: [try] auto-closeable resource LocalCluster has a member method close() that could throw InterruptedException
+public final class LocalCluster implements AutoCloseable {
+             ^
+/Users/xunxun/minilog/src/main/java/dev/minilog/bench/LocalCluster.java:89: warning: [try] auto-closeable resource s is never referenced in body of corresponding try statement
+            try (java.net.Socket s = new java.net.Socket("localhost", port)) {
+                                 ^
+2 warnings

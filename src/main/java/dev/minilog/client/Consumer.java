@@ -78,6 +78,7 @@ public final class Consumer implements Closeable {
 
     /** Manual assignment without a group. Positions start per autoOffsetReset unless {@link #seek} is used. */
     public void assign(List<TopicPartition> partitions) throws IOException {
+        invalidatePendingFetches();
         positions.clear();
         cluster.refreshMetadata();
         for (TopicPartition tp : partitions) {
@@ -86,6 +87,7 @@ public final class Consumer implements Closeable {
     }
 
     public void seek(TopicPartition tp, long offset) {
+        invalidatePendingFetches();
         positions.put(tp, offset);
     }
 
@@ -118,7 +120,19 @@ public final class Consumer implements Closeable {
         return List.of();
     }
 
-    /** Sends one fetch to every leader of an assigned partition, in parallel, and merges the results. */
+    /** A fetch that is still in flight, tagged with the assignment epoch it was built for. */
+    private record PendingFetch(int leader, long assignmentEpoch, Future<FetchResponse> future) {
+    }
+
+    private final Map<Integer, PendingFetch> pending = new HashMap<>();
+    private long assignmentEpoch;
+    private final java.util.concurrent.LinkedBlockingQueue<Integer> completions = new java.util.concurrent.LinkedBlockingQueue<>();
+
+    /**
+     * Keeps one long-poll fetch in flight per leader broker and returns as soon as <em>any</em> of
+     * them completes. Waiting for all of them would let an idle partition's long poll
+     * (fetch.max.wait.ms) delay records that are already available from another broker.
+     */
     private List<ConsumerRecord> fetchOnce() throws IOException {
         if (positions.isEmpty()) {
             Time.sleepQuietly(Math.min(50, config.fetchMaxWaitMs()));
@@ -141,27 +155,51 @@ public final class Consumer implements Closeable {
         if (missingLeader) {
             refreshQuietly();
         }
-        Map<Integer, Future<FetchResponse>> futures = new HashMap<>();
         for (Map.Entry<Integer, List<FetchRequest.FetchPartition>> e : byLeader.entrySet()) {
-            futures.put(e.getKey(), ioPool.submit(() -> cluster.connectionTo(e.getKey()).<FetchResponse>call(
-                    ApiKey.FETCH, new FetchRequest(-1, config.fetchMaxWaitMs(), e.getValue()))));
+            int leader = e.getKey();
+            if (!pending.containsKey(leader)) {
+                FetchRequest req = new FetchRequest(-1, config.fetchMaxWaitMs(), e.getValue());
+                pending.put(leader, new PendingFetch(leader, assignmentEpoch, ioPool.submit(() -> {
+                    try {
+                        return cluster.connectionTo(leader).<FetchResponse>call(ApiKey.FETCH, req);
+                    } finally {
+                        completions.offer(leader); // wakes the poll thread
+                    }
+                })));
+            }
         }
+        // Wait until at least one in-flight fetch completes (bounded by the long-poll time).
+        if (pending.values().stream().noneMatch(p -> p.future().isDone())) {
+            try {
+                completions.poll(config.fetchMaxWaitMs() + 1000L, java.util.concurrent.TimeUnit.MILLISECONDS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        completions.clear();
         List<ConsumerRecord> out = new ArrayList<>();
         boolean refresh = false;
-        for (Map.Entry<Integer, Future<FetchResponse>> f : futures.entrySet()) {
+        for (PendingFetch pf : List.copyOf(pending.values())) {
+            if (!pf.future().isDone()) {
+                continue;
+            }
+            pending.remove(pf.leader());
             FetchResponse resp;
             try {
-                resp = f.getValue().get();
+                resp = pf.future().get();
             } catch (Exception ex) {
-                cluster.invalidate(f.getKey());
+                cluster.invalidate(pf.leader());
                 refresh = true;
                 continue;
+            }
+            if (pf.assignmentEpoch() != assignmentEpoch) {
+                continue; // built for an old assignment/position: discard
             }
             for (FetchResponse.PartitionData pd : resp.partitions()) {
                 TopicPartition tp = pd.tp();
                 Long position = positions.get(tp);
                 if (position == null) {
-                    continue; // revoked meanwhile
+                    continue;
                 }
                 switch (pd.error()) {
                     case NONE -> {
@@ -189,6 +227,11 @@ public final class Consumer implements Closeable {
             }
         }
         return out;
+    }
+
+    /** Positions changed outside the fetch path: results of in-flight fetches must be ignored. */
+    private void invalidatePendingFetches() {
+        assignmentEpoch++;
     }
 
     private void refreshQuietly() {
@@ -254,6 +297,7 @@ public final class Consumer implements Closeable {
     }
 
     private void onAssignment(List<TopicPartition> assignment) throws IOException {
+        invalidatePendingFetches();
         positions.clear();
         lastCommitted = new HashMap<>();
         if (assignment.isEmpty()) {

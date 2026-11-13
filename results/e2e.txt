@@ -1,0 +1,21 @@
+# 2026-11-12 18:34:22 PST  Apple M2 8 cores 24 GiB  macOS 15.4
+# openjdk version "21.0.5" 2024-10-15 LTS
+# broker JVMs: -Xms512m -Xmx512m -XX:+UseG1GC ; all processes on localhost
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks 1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=1, warmup-seconds=5} started=2026-11-12T18:34:22 java=21.0.5 cores=8
+RESULT e2e acks=1 rate=5000 size=100 sent=125000 received=125000 samples=100000 p50_ms=0.272 p99_ms=1.009 p999_ms=4.582 max_ms=10.893
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks -1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=-1, warmup-seconds=5} started=2026-11-12T18:34:50 java=21.0.5 cores=8
+RESULT e2e acks=-1 rate=5000 size=100 sent=125001 received=125001 samples=100001 p50_ms=0.249 p99_ms=0.863 p999_ms=2.459 max_ms=9.342
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks 1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=1, warmup-seconds=5} started=2026-11-12T18:35:18 java=21.0.5 cores=8
+RESULT e2e acks=1 rate=5000 size=100 sent=125001 received=125001 samples=100001 p50_ms=0.320 p99_ms=3.707 p999_ms=11.333 max_ms=25.123
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks -1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=-1, warmup-seconds=5} started=2026-11-12T18:35:46 java=21.0.5 cores=8
+RESULT e2e acks=-1 rate=5000 size=100 sent=125001 received=125001 samples=100011 p50_ms=0.566 p99_ms=61.906 p999_ms=120.419 max_ms=126.537
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks 1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=1, warmup-seconds=5} started=2026-11-12T18:36:14 java=21.0.5 cores=8
+RESULT e2e acks=1 rate=5000 size=100 sent=125000 received=125000 samples=100000 p50_ms=0.223 p99_ms=0.792 p999_ms=1.861 max_ms=18.542
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench e2e --rate 5000 --seconds 20 --warmup-seconds 5 --acks -1 --size 100
+# minilog bench mode=e2e opts={seconds=20, size=100, rate=5000, acks=-1, warmup-seconds=5} started=2026-11-12T18:36:42 java=21.0.5 cores=8
+RESULT e2e acks=-1 rate=5000 size=100 sent=125000 received=125000 samples=100000 p50_ms=0.243 p99_ms=0.840 p999_ms=1.294 max_ms=17.575

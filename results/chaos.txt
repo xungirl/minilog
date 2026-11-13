@@ -1,0 +1,70 @@
+# 2026-11-12 18:42:43 PST  Apple M2 8 cores 24 GiB  macOS 15.4
+# openjdk version "21.0.5" 2024-10-15 LTS
+# broker JVMs: -Xms512m -Xmx512m -XX:+UseG1GC ; all processes on localhost
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench chaos --seconds 120 --seed 20261112
+# minilog bench mode=chaos opts={seconds=120, seed=20261112} started=2026-11-12T18:42:43 java=21.0.5 cores=8
+EVENT kill -9 broker 3, restart after 3388 ms (acked so far 93000)
+EVENT kill -9 broker 1, restart after 3545 ms (acked so far 357800)
+EVENT kill -9 broker 3, restart after 3583 ms (acked so far 585000)
+EVENT kill -9 broker 2, restart after 3178 ms (acked so far 777800)
+EVENT kill -9 broker 3, restart after 2790 ms (acked so far 1005400)
+EVENT kill -9 broker 2, restart after 3243 ms (acked so far 1208400)
+EVENT kill -9 broker 1, restart after 3464 ms (acked so far 1435000)
+EVENT kill -9 broker 1, restart after 3578 ms (acked so far 1615200)
+EVENT replaced one consumer (rebalance)
+EVENT kill -9 broker 2, restart after 3057 ms (acked so far 1870000)
+EVENT kill -9 broker 3, restart after 3746 ms (acked so far 2053200)
+EVENT kill -9 broker 2, restart after 2471 ms (acked so far 2242600)
+EVENT kill -9 broker 1, restart after 1814 ms (acked so far 2419800)
+EVENT kill -9 broker 3, restart after 3735 ms (acked so far 2558400)
+EVENT kill -9 broker 2, restart after 2975 ms (acked so far 2815000)
+EVENT kill -9 broker 3, restart after 1153 ms (acked so far 3068000)
+EVENT kill -9 broker 2, restart after 2677 ms (acked so far 3138800)
+EVENT kill -9 broker 1, restart after 3240 ms (acked so far 3301600)
+RESULT chaos seed=20261112 seconds=120 kills=17 acked=3393800 consumed_records=3393800 distinct_consumed=3393800 lost_acked=0 duplicates=0 unacked_but_consumed=0 failed_sends=0 order_violations=0
+KILLS [3:3388, 1:3545, 3:3583, 2:3178, 3:2790, 2:3243, 1:3464, 1:3578, 2:3057, 3:3746, 2:2471, 1:1814, 3:3735, 2:2975, 3:1153, 2:2677, 1:3240]
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench chaos --seconds 120 --seed 7
+# minilog bench mode=chaos opts={seconds=120, seed=7} started=2026-11-12T18:44:54 java=21.0.5 cores=8
+EVENT kill -9 broker 3, restart after 2485 ms (acked so far 155800)
+EVENT kill -9 broker 2, restart after 3254 ms (acked so far 357600)
+EVENT kill -9 broker 3, restart after 3850 ms (acked so far 579800)
+EVENT kill -9 broker 1, restart after 3712 ms (acked so far 749000)
+EVENT kill -9 broker 2, restart after 2495 ms (acked so far 948800)
+EVENT kill -9 broker 1, restart after 1738 ms (acked so far 1153800)
+EVENT kill -9 broker 1, restart after 3842 ms (acked so far 1325000)
+EVENT kill -9 broker 1, restart after 2051 ms (acked so far 1571000)
+EVENT replaced one consumer (rebalance)
+EVENT kill -9 broker 3, restart after 2239 ms (acked so far 1730600)
+EVENT kill -9 broker 1, restart after 2811 ms (acked so far 1866000)
+EVENT kill -9 broker 1, restart after 1679 ms (acked so far 2001000)
+EVENT kill -9 broker 1, restart after 3492 ms (acked so far 2128000)
+EVENT kill -9 broker 1, restart after 3646 ms (acked so far 2361400)
+EVENT kill -9 broker 3, restart after 2880 ms (acked so far 2584200)
+EVENT kill -9 broker 1, restart after 2333 ms (acked so far 2803400)
+EVENT kill -9 broker 2, restart after 3289 ms (acked so far 2993600)
+RESULT chaos seed=7 seconds=120 kills=16 acked=3087800 consumed_records=3087800 distinct_consumed=3087800 lost_acked=0 duplicates=0 unacked_but_consumed=0 failed_sends=0 order_violations=0
+KILLS [3:2485, 2:3254, 3:3850, 1:3712, 2:2495, 1:1738, 1:3842, 1:2051, 3:2239, 1:2811, 1:1679, 1:3492, 1:3646, 3:2880, 1:2333, 2:3289]
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench chaos --seconds 120 --seed 42
+# minilog bench mode=chaos opts={seconds=120, seed=42} started=2026-11-12T18:46:59 java=21.0.5 cores=8
+EVENT kill -9 broker 1, restart after 2248 ms (acked so far 116600)
+EVENT kill -9 broker 1, restart after 2525 ms (acked so far 265000)
+EVENT kill -9 broker 3, restart after 2519 ms (acked so far 444800)
+EVENT kill -9 broker 3, restart after 2502 ms (acked so far 624600)
+EVENT kill -9 broker 1, restart after 1476 ms (acked so far 742600)
+EVENT kill -9 broker 1, restart after 2170 ms (acked so far 820200)
+EVENT kill -9 broker 3, restart after 2400 ms (acked so far 1010200)
+EVENT kill -9 broker 3, restart after 3913 ms (acked so far 1209800)
+EVENT kill -9 broker 1, restart after 2030 ms (acked so far 1438200)
+EVENT replaced one consumer (rebalance)
+EVENT kill -9 broker 2, restart after 1246 ms (acked so far 1620600)
+EVENT kill -9 broker 1, restart after 2430 ms (acked so far 1726800)
+EVENT kill -9 broker 3, restart after 2727 ms (acked so far 1881600)
+EVENT kill -9 broker 2, restart after 3713 ms (acked so far 2064200)
+EVENT kill -9 broker 3, restart after 3065 ms (acked so far 2277200)
+EVENT kill -9 broker 2, restart after 3975 ms (acked so far 2498000)
+EVENT kill -9 broker 2, restart after 1935 ms (acked so far 2684000)
+EVENT kill -9 broker 2, restart after 1193 ms (acked so far 2797200)
+EVENT kill -9 broker 3, restart after 2756 ms (acked so far 2888400)
+EVENT kill -9 broker 2, restart after 3713 ms (acked so far 3050000)
+RESULT chaos seed=42 seconds=120 kills=19 acked=3152400 consumed_records=3152400 distinct_consumed=3152400 lost_acked=0 duplicates=0 unacked_but_consumed=0 failed_sends=0 order_violations=0
+KILLS [1:2248, 1:2525, 3:2519, 3:2502, 1:1476, 1:2170, 3:2400, 3:3913, 1:2030, 2:1246, 1:2430, 3:2727, 2:3713, 3:3065, 2:3975, 2:1935, 2:1193, 3:2756, 2:3713]

@@ -1,0 +1,21 @@
+# 2026-11-12 18:33:55 PST  Apple M2 8 cores 24 GiB  macOS 15.4
+# openjdk version "21.0.5" 2024-10-15 LTS
+# broker JVMs: -Xms512m -Xmx512m -XX:+UseG1GC ; all processes on localhost
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench consume --size 100 --messages 1000000
+# minilog bench mode=consume opts={size=100, messages=1000000} started=2026-11-12T18:33:55 java=21.0.5 cores=8
+RESULT consume size=100 messages=1000000 seconds=1.026 msgs_per_sec=974980 mib_per_sec=92.98
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench consume --size 1024 --messages 300000
+# minilog bench mode=consume opts={size=1024, messages=300000} started=2026-11-12T18:34 java=21.0.5 cores=8
+RESULT consume size=1024 messages=300000 seconds=0.773 msgs_per_sec=387874 mib_per_sec=378.78
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench consume --size 100 --messages 1000000
+# minilog bench mode=consume opts={size=100, messages=1000000} started=2026-11-12T18:34:04 java=21.0.5 cores=8
+RESULT consume size=100 messages=1000000 seconds=1.348 msgs_per_sec=741829 mib_per_sec=70.75
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench consume --size 1024 --messages 300000
+# minilog bench mode=consume opts={size=1024, messages=300000} started=2026-11-12T18:34:09 java=21.0.5 cores=8
+RESULT consume size=1024 messages=300000 seconds=0.467 msgs_per_sec=641840 mib_per_sec=626.80
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench consume --size 100 --messages 1000000
+# minilog bench mode=consume opts={size=100, messages=1000000} started=2026-11-12T18:34:13 java=21.0.5 cores=8
+RESULT consume size=100 messages=1000000 seconds=1.265 msgs_per_sec=790417 mib_per_sec=75.38
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench consume --size 1024 --messages 300000
+# minilog bench mode=consume opts={size=1024, messages=300000} started=2026-11-12T18:34:18 java=21.0.5 cores=8
+RESULT consume size=1024 messages=300000 seconds=0.497 msgs_per_sec=603845 mib_per_sec=589.69

@@ -315,9 +315,12 @@ public final class Bench {
                     Thread.sleep(1000);
                     int leader = cluster.leaderOf(tp);
                     firstAckAfterKillNs.set(0);
+                    // Start the clock only once the process is confirmed dead (kill() waits for
+                    // exit): a record acked by the leader in the few ms before SIGKILL takes effect
+                    // must not count as "available after the kill".
+                    cluster.kill(leader);
                     long k = System.nanoTime();
                     killNs.set(k);
-                    cluster.kill(leader);
                     while (firstAckAfterKillNs.get() == 0) {
                         Thread.sleep(1);
                     }

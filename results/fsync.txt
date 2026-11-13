@@ -1,0 +1,39 @@
+# 2026-11-12 18:37:10 PST  Apple M2 8 cores 24 GiB  macOS 15.4
+# openjdk version "21.0.5" 2024-10-15 LTS
+# broker JVMs: -Xms512m -Xmx512m -XX:+UseG1GC ; all processes on localhost
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy none --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=none} started=2026-11-12T18:37:10 java=21.0.5 cores=8
+RESULT fsync policy=none size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=1.054 msgs_per_sec=94858 mib_per_sec=92.63
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy interval-1000ms --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=interval-1000ms} started=2026-11-12T18:37:13 java=21.0.5 cores=8
+RESULT fsync policy=interval-1000ms size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=1.057 msgs_per_sec=94647 mib_per_sec=92.43
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy every-1000 --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=every-1000} started=2026-11-12T18:37:16 java=21.0.5 cores=8
+RESULT fsync policy=every-1000 size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=2.221 msgs_per_sec=45028 mib_per_sec=43.97
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy every-1 --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=every-1} started=2026-11-12T18:37:20 java=21.0.5 cores=8
+RESULT fsync policy=every-1 size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=50.766 msgs_per_sec=1970 mib_per_sec=1.92
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy none --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=none} started=2026-11-12T18:38:18 java=21.0.5 cores=8
+RESULT fsync policy=none size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=1.002 msgs_per_sec=99822 mib_per_sec=97.48
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy interval-1000ms --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=interval-1000ms} started=2026-11-12T18:38:21 java=21.0.5 cores=8
+RESULT fsync policy=interval-1000ms size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=0.964 msgs_per_sec=103699 mib_per_sec=101.27
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy every-1000 --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=every-1000} started=2026-11-12T18:38:24 java=21.0.5 cores=8
+RESULT fsync policy=every-1000 size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=2.065 msgs_per_sec=48434 mib_per_sec=47.30
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy every-1 --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=every-1} started=2026-11-12T18:38:28 java=21.0.5 cores=8
+RESULT fsync policy=every-1 size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=53.164 msgs_per_sec=1881 mib_per_sec=1.84
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy none --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=none} started=2026-11-12T18:39:28 java=21.0.5 cores=8
+RESULT fsync policy=none size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=1.107 msgs_per_sec=90316 mib_per_sec=88.20
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy interval-1000ms --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=interval-1000ms} started=2026-11-12T18:39:31 java=21.0.5 cores=8
+RESULT fsync policy=interval-1000ms size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=1.156 msgs_per_sec=86519 mib_per_sec=84.49
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy every-1000 --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=every-1000} started=2026-11-12T18:39:34 java=21.0.5 cores=8
+RESULT fsync policy=every-1000 size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=2.355 msgs_per_sec=42458 mib_per_sec=41.46
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench fsync --policy every-1 --size 1024 --acks 1 --batch 16384 --messages 100000
+# minilog bench mode=fsync opts={size=1024, acks=1, batch=16384, messages=100000, policy=every-1} started=2026-11-12T18:39:39 java=21.0.5 cores=8
+RESULT fsync policy=every-1 size=1024 acks=1 batch=16384 linger=5 messages=100000 failed=0 seconds=51.698 msgs_per_sec=1934 mib_per_sec=1.89

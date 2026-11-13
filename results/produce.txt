@@ -1,0 +1,111 @@
+# 2026-11-12 18:31:24 PST  Apple M2 8 cores 24 GiB  macOS 15.4
+# openjdk version "21.0.5" 2024-10-15 LTS
+# broker JVMs: -Xms512m -Xmx512m -XX:+UseG1GC ; all processes on localhost
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 0 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=0, batch=16384, messages=1000000} started=2026-11-12T18:31:25 java=21.0.5 cores=8
+RESULT produce size=100 acks=0 batch=16384 linger=5 messages=1000000 failed=0 seconds=1.882 msgs_per_sec=531222 mib_per_sec=50.66
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 0 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=0, batch=131072, messages=1000000} started=2026-11-12T18:31:28 java=21.0.5 cores=8
+RESULT produce size=100 acks=0 batch=131072 linger=5 messages=1000000 failed=0 seconds=1.811 msgs_per_sec=552243 mib_per_sec=52.67
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 1 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=1, batch=16384, messages=1000000} started=2026-11-12T18:31:32 java=21.0.5 cores=8
+RESULT produce size=100 acks=1 batch=16384 linger=5 messages=1000000 failed=0 seconds=2.717 msgs_per_sec=368084 mib_per_sec=35.10
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 1 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=1, batch=131072, messages=1000000} started=2026-11-12T18:31:37 java=21.0.5 cores=8
+RESULT produce size=100 acks=1 batch=131072 linger=5 messages=1000000 failed=0 seconds=1.717 msgs_per_sec=582332 mib_per_sec=55.54
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks -1 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=-1, batch=16384, messages=1000000} started=2026-11-12T18:31:41 java=21.0.5 cores=8
+RESULT produce size=100 acks=-1 batch=16384 linger=5 messages=1000000 failed=0 seconds=3.135 msgs_per_sec=318932 mib_per_sec=30.42
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks -1 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=-1, batch=131072, messages=1000000} started=2026-11-12T18:31:46 java=21.0.5 cores=8
+RESULT produce size=100 acks=-1 batch=131072 linger=5 messages=1000000 failed=0 seconds=1.975 msgs_per_sec=506317 mib_per_sec=48.29
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 0 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=0, batch=16384, messages=300000} started=2026-11-12T18:31:50 java=21.0.5 cores=8
+RESULT produce size=1024 acks=0 batch=16384 linger=5 messages=300000 failed=0 seconds=1.482 msgs_per_sec=202375 mib_per_sec=197.63
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 0 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=0, batch=131072, messages=300000} started=2026-11-12T18:31:54 java=21.0.5 cores=8
+RESULT produce size=1024 acks=0 batch=131072 linger=5 messages=300000 failed=0 seconds=1.043 msgs_per_sec=287585 mib_per_sec=280.84
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 1 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=1, batch=16384, messages=300000} started=2026-11-12T18:31:57 java=21.0.5 cores=8
+RESULT produce size=1024 acks=1 batch=16384 linger=5 messages=300000 failed=0 seconds=2.545 msgs_per_sec=117901 mib_per_sec=115.14
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 1 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=1, batch=131072, messages=300000} started=2026-11-12T18:32:02 java=21.0.5 cores=8
+RESULT produce size=1024 acks=1 batch=131072 linger=5 messages=300000 failed=0 seconds=1.264 msgs_per_sec=237283 mib_per_sec=231.72
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks -1 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=-1, batch=16384, messages=300000} started=2026-11-12T18:32:05 java=21.0.5 cores=8
+RESULT produce size=1024 acks=-1 batch=16384 linger=5 messages=300000 failed=0 seconds=2.967 msgs_per_sec=101104 mib_per_sec=98.73
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks -1 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=-1, batch=131072, messages=300000} started=2026-11-12T18:32:11 java=21.0.5 cores=8
+RESULT produce size=1024 acks=-1 batch=131072 linger=5 messages=300000 failed=0 seconds=1.489 msgs_per_sec=201428 mib_per_sec=196.71
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 0 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=0, batch=16384, messages=1000000} started=2026-11-12T18:32:14 java=21.0.5 cores=8
+RESULT produce size=100 acks=0 batch=16384 linger=5 messages=1000000 failed=0 seconds=1.918 msgs_per_sec=521364 mib_per_sec=49.72
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 0 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=0, batch=131072, messages=1000000} started=2026-11-12T18:32:18 java=21.0.5 cores=8
+RESULT produce size=100 acks=0 batch=131072 linger=5 messages=1000000 failed=0 seconds=1.780 msgs_per_sec=561734 mib_per_sec=53.57
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 1 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=1, batch=16384, messages=1000000} started=2026-11-12T18:32:22 java=21.0.5 cores=8
+RESULT produce size=100 acks=1 batch=16384 linger=5 messages=1000000 failed=0 seconds=2.865 msgs_per_sec=348980 mib_per_sec=33.28
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 1 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=1, batch=131072, messages=1000000} started=2026-11-12T18:32:27 java=21.0.5 cores=8
+RESULT produce size=100 acks=1 batch=131072 linger=5 messages=1000000 failed=0 seconds=1.736 msgs_per_sec=576013 mib_per_sec=54.93
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks -1 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=-1, batch=16384, messages=1000000} started=2026-11-12T18:32:30 java=21.0.5 cores=8
+RESULT produce size=100 acks=-1 batch=16384 linger=5 messages=1000000 failed=0 seconds=3.332 msgs_per_sec=300137 mib_per_sec=28.62
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks -1 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=-1, batch=131072, messages=1000000} started=2026-11-12T18:32:36 java=21.0.5 cores=8
+RESULT produce size=100 acks=-1 batch=131072 linger=5 messages=1000000 failed=0 seconds=1.711 msgs_per_sec=584356 mib_per_sec=55.73
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 0 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=0, batch=16384, messages=300000} started=2026-11-12T18:32:40 java=21.0.5 cores=8
+RESULT produce size=1024 acks=0 batch=16384 linger=5 messages=300000 failed=0 seconds=1.386 msgs_per_sec=216441 mib_per_sec=211.37
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 0 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=0, batch=131072, messages=300000} started=2026-11-12T18:32:43 java=21.0.5 cores=8
+RESULT produce size=1024 acks=0 batch=131072 linger=5 messages=300000 failed=0 seconds=0.944 msgs_per_sec=317845 mib_per_sec=310.40
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 1 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=1, batch=16384, messages=300000} started=2026-11-12T18:32:46 java=21.0.5 cores=8
+RESULT produce size=1024 acks=1 batch=16384 linger=5 messages=300000 failed=0 seconds=2.556 msgs_per_sec=117355 mib_per_sec=114.60
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 1 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=1, batch=131072, messages=300000} started=2026-11-12T18:32:51 java=21.0.5 cores=8
+RESULT produce size=1024 acks=1 batch=131072 linger=5 messages=300000 failed=0 seconds=1.245 msgs_per_sec=241026 mib_per_sec=235.38
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks -1 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=-1, batch=16384, messages=300000} started=2026-11-12T18:32:55 java=21.0.5 cores=8
+RESULT produce size=1024 acks=-1 batch=16384 linger=5 messages=300000 failed=0 seconds=3.072 msgs_per_sec=97649 mib_per_sec=95.36
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks -1 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=-1, batch=131072, messages=300000} started=2026-11-12T18:33 java=21.0.5 cores=8
+RESULT produce size=1024 acks=-1 batch=131072 linger=5 messages=300000 failed=0 seconds=1.404 msgs_per_sec=213734 mib_per_sec=208.73
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 0 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=0, batch=16384, messages=1000000} started=2026-11-12T18:33:03 java=21.0.5 cores=8
+RESULT produce size=100 acks=0 batch=16384 linger=5 messages=1000000 failed=0 seconds=1.709 msgs_per_sec=585127 mib_per_sec=55.80
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 0 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=0, batch=131072, messages=1000000} started=2026-11-12T18:33:07 java=21.0.5 cores=8
+RESULT produce size=100 acks=0 batch=131072 linger=5 messages=1000000 failed=0 seconds=1.718 msgs_per_sec=582054 mib_per_sec=55.51
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 1 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=1, batch=16384, messages=1000000} started=2026-11-12T18:33:11 java=21.0.5 cores=8
+RESULT produce size=100 acks=1 batch=16384 linger=5 messages=1000000 failed=0 seconds=2.820 msgs_per_sec=354628 mib_per_sec=33.82
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks 1 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=1, batch=131072, messages=1000000} started=2026-11-12T18:33:16 java=21.0.5 cores=8
+RESULT produce size=100 acks=1 batch=131072 linger=5 messages=1000000 failed=0 seconds=2.096 msgs_per_sec=477127 mib_per_sec=45.50
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks -1 --batch 16384 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=-1, batch=16384, messages=1000000} started=2026-11-12T18:33:20 java=21.0.5 cores=8
+RESULT produce size=100 acks=-1 batch=16384 linger=5 messages=1000000 failed=0 seconds=3.617 msgs_per_sec=276499 mib_per_sec=26.37
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 100 --acks -1 --batch 131072 --linger 5 --messages 1000000
+# minilog bench mode=produce opts={size=100, linger=5, acks=-1, batch=131072, messages=1000000} started=2026-11-12T18:33:26 java=21.0.5 cores=8
+RESULT produce size=100 acks=-1 batch=131072 linger=5 messages=1000000 failed=0 seconds=1.987 msgs_per_sec=503311 mib_per_sec=48.00
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 0 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=0, batch=16384, messages=300000} started=2026-11-12T18:33:30 java=21.0.5 cores=8
+RESULT produce size=1024 acks=0 batch=16384 linger=5 messages=300000 failed=0 seconds=1.557 msgs_per_sec=192653 mib_per_sec=188.14
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 0 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=0, batch=131072, messages=300000} started=2026-11-12T18:33:34 java=21.0.5 cores=8
+RESULT produce size=1024 acks=0 batch=131072 linger=5 messages=300000 failed=0 seconds=1.067 msgs_per_sec=281227 mib_per_sec=274.64
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 1 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=1, batch=16384, messages=300000} started=2026-11-12T18:33:37 java=21.0.5 cores=8
+RESULT produce size=1024 acks=1 batch=16384 linger=5 messages=300000 failed=0 seconds=3.151 msgs_per_sec=95216 mib_per_sec=92.98
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks 1 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=1, batch=131072, messages=300000} started=2026-11-12T18:33:42 java=21.0.5 cores=8
+RESULT produce size=1024 acks=1 batch=131072 linger=5 messages=300000 failed=0 seconds=1.323 msgs_per_sec=226772 mib_per_sec=221.46
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks -1 --batch 16384 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=-1, batch=16384, messages=300000} started=2026-11-12T18:33:46 java=21.0.5 cores=8
+RESULT produce size=1024 acks=-1 batch=16384 linger=5 messages=300000 failed=0 seconds=3.191 msgs_per_sec=94001 mib_per_sec=91.80
+$ java -Xms2g -Xmx2g -XX:+UseG1GC -Dminilog.log=quiet -cp build/libs/minilog.jar dev.minilog.bench.Bench produce --size 1024 --acks -1 --batch 131072 --linger 5 --messages 300000
+# minilog bench mode=produce opts={size=1024, linger=5, acks=-1, batch=131072, messages=300000} started=2026-11-12T18:33:51 java=21.0.5 cores=8
+RESULT produce size=1024 acks=-1 batch=131072 linger=5 messages=300000 failed=0 seconds=1.444 msgs_per_sec=207749 mib_per_sec=202.88
